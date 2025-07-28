@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagamento Simples</title>
+  <title>Pagamento</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,16 +13,51 @@
   <form id="paymentForm">
     <input type="text" name="cardHolder" placeholder="Nome do titular" required>
     <input type="text" name="cardNumber" placeholder="Número do cartão" required>
-    <input type="text" name="expirationMonth" placeholder="Mês de expiração (ex: 12)" required>
-    <input type="text" name="expirationYear" placeholder="Ano de expiração (ex: 2026)" required>
-    <input type="text" name="cvv" placeholder="CVV" required>
-    <input type="number" name="amount" placeholder="Valor em R$" required>
-    <input type="number" name="installments" placeholder="Parcelas" required>
+    <div class="item-row">
+      <input type="month" name="expirationMonth" placeholder="Mês de expiração (ex: 12)" required>
+      <select name="expirationYear" required>
+        <option value="">Selecione o ano</option>
+        <script>
+          const currentYear = new Date().getFullYear();
+          const select = document.currentScript.parentElement;
+          for (let year = currentYear; year <= currentYear + 20; year++) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            select.appendChild(option);
+          }
+        </script>
+      </select>
+    </div>
+    <div class="item-row">
+      <input type="text" name="cvv" placeholder="CVV" required>
+      <input type="number" id="amount" name="amount" placeholder="Valor em R$" required>
+      <select name="installments" required>
+        <option value="">Parcelas</option>
+      </select>
+      <script>
+        const tax = 0.02;
+        const amountInput = document.getElementById('amount');
+        const selects = document.querySelector('select[name="installments"]');
+
+        amountInput.addEventListener('input', () => {
+          selects.innerHTML = '<option value="">Parcelas</option>';
+
+          for (let i = 1; i <= 12; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${i} vezes (sem juros)`;
+
+            selects.appendChild(option);
+          }
+        });
+      </script>
+    </div>
     <button type="submit">Criar Pagamento</button>
   </form>
 
-  <div class="payments">
-    <h2>Pagamentos Criados</h2>
+  <div class="payments" id="paymentsContainer">
+    <h2>Histórico de Pagamentos</h2>
     <div id="paymentsList"></div>
   </div>
 

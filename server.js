@@ -27,12 +27,12 @@ app.get(SSE_PATH, (req, res) => {
   res.flushHeaders();
 
   clients.push(res);
-  console.log('Cliente SSE conectado');
+  console.log('Client SSE connected');
 
   req.on('close', () => {
     const index = clients.indexOf(res);
     if (index !== -1) clients.splice(index, 1);
-    console.log('Cliente SSE desconectado');
+    console.log('Client SSE disconnected');
   });
 });
 
@@ -43,11 +43,11 @@ app.post('/malga.io/process_payment_out/listener', (req, res) => {
     client.write(`data: ${JSON.stringify(payload)}\n\n`);
   });
 
-  console.log('Emitido evento:', payload);
+  console.log('Emitter event:', payload);
   res.json({ success: true });
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-  console.log(`Escutando SSE em ${SSE_PATH}`);
+  console.log(`Server running in http://localhost:${PORT}`);
+  console.log(`Listening SSE em ${SSE_PATH}`);
 });

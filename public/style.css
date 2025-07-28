@@ -1,37 +1,64 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #121212;
+  color: #e0e0e0;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
 }
 
 h1 {
-  color: #333;
+  color: #ffffff;
 }
 
-form,
-.payments {
-  background: white;
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background: #1e1e1e;
   padding: 2rem;
-  margin-top: 1rem;
-  border-radius: 8px;
   width: 100%;
+  border-radius: 8px;
   max-width: 500px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
 }
 
 form input,
 form select,
 form button {
-  width: 100%;
   padding: 0.75rem;
-  margin-bottom: 1rem;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+}
+
+form input::placeholder {
+  color: #aaa;
+}
+
+.item-row {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.item-row > input,
+.item-row > select {
+  width: 50%;
+}
+
+form > input {
+  width: 95%;
+}
+
+form > button {
+  width: 100%;
 }
 
 form button {
@@ -45,7 +72,61 @@ form button:hover {
   background-color: #45a049;
 }
 
+#paymentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .payment-item {
-  padding: 0.5rem;
-  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+}
+
+.payment-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-id {
+  font-weight: bold;
+  word-break: break-word;
+  color: #fff;
+}
+
+.payment-status {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.payment-meta {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.payment-item button {
+  margin-top: 0.5rem;
+  align-self: flex-end;
+  padding: 0.4rem 1rem;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.payment-item button:hover {
+  background-color: #b71c1c;
+}
+
+.hidden {
+  display: none !important;
 }
